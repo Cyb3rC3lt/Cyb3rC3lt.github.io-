@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       },
       "opacity": {
-        "value": 0.5,
+        "value": 2.5,
         "random": false,
         "anim": {
           "enable": false,
@@ -54,8 +54,8 @@ document.addEventListener("DOMContentLoaded", function () {
         "enable": true,
         "distance": 150,
         "color": "#ffffff",
-        "opacity": 0.4,
-        "width": 1
+        "opacity": 1.5,
+        "width": 2
       },
       "move": {
         "enable": true,
