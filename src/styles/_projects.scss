@@ -34,7 +34,27 @@
     margin-left: 0;
     width: 48%;
   }
+
+  .my-link {
+  h3 {
+    font-size: 1.5rem;
+    color: #d30000;
+    margin-top: 1em;
+    padding-top: 1em;
+    line-height: 1.25;
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+    font-family: "Montserrat",sans-serif;
+    padding: 0;
+  }
 }
+}
+
+
 
 .contents-right {
   @media only screen and (min-width: $cut) {

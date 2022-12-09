@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 {% include head.html %}
-<div class="contents-center">
-<h1 align=center>{{ page.title }}</h1>
+
+<div class="post-title">
+<h3>{{ page.title }}</h3>
 </div>
 
 <p align=center>
@@ -18,7 +19,7 @@
 
 <br>
 <div class="post-details">
-<a href="/#projects">Back</a>
+<a href="/#{{ page.title }}">Back</a>
 </div>
 {% include footer.html %}
 </body>
