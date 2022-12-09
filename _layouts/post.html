@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+{% include head.html %}
+<div class="contents-center">
+<h1 align=center>{{ page.title }}</h1>
+</div>
+<p align=center>
+<u> {{ page.date | date_to_string }}</u>
+</p>
+
+<div class="contents-left">
+<a href="/#projects">Back</a>
+</div>
+
+
+<div class="user-projects">
+  <div class="contents-left">
+    <p>{{ content }}</p>
+</div>
+</div>
+
+<br>
+<a href="/#projects">Back</a>
+{% include footer.html %}
+</body>
+</html>
