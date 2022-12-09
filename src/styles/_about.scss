@@ -33,12 +33,16 @@
 }
 
 .post-details {
+h1 {
+    font-size: 24px;
+    text-align: center;
+  }
   text-align: left;
   width: 90%;
   margin: 0 auto;
   font-size: 14px;
   max-width: 960px;
   @media only screen and (min-width: $cut) {
-    width: 80%;
+    width: 90%;
   }
 }
