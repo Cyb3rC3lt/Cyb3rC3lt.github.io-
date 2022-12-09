@@ -252,7 +252,7 @@
     "got": "^7.1.0",
     "graceful-fs": "^4.2.10",
     "graceful-readlink": "^1.0.1",
-    "gulp": "^4.0.0",
+    "gulp": "^4.0.2",
     "gulp-cli": "^2.0.1",
     "gulp-concat": "^2.6.1",
     "gulp-csso": "^3.0.1",
