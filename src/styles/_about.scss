@@ -33,10 +33,6 @@
 }
 
 .post-details {
-h1 {
-    font-size: 24px;
-    text-align: center;
-  }
   text-align: left;
   width: 90%;
   margin: 0 auto;
@@ -48,23 +44,30 @@ h1 {
 }
 
 .post-title {
-    font-size: 100%;
-    text-align: center;
+  text-align: center;
+  width: 90%;
+  margin: 0 auto;
+  font-size: 34px;
+  max-width: 960px;
+  color: #D30000;
+  @media only screen and (min-width: $cut) {
     width: 90%;
-    margin: 0 auto;
+  }
+}
+
+.post-title2 {
+h3{margin-block-start:50; margin-block-end:50; margin-inline-start:50; margin-inline-end:50;
+}
+
+margin: 0 auto;
+    width: 90%;
     line-height: 1.5;
     max-width: 960px;
     color: #555;
     font-family: "Montserrat",sans-serif;
-    display: block;
     font-size: 1.17em;
-    margin-block-start: 1em;
-    margin-block-end: 1em;
-    margin-inline-start: 190px;
-    margin-inline-end: 10px;
     font-weight: bold;
-
-    @media only screen and (min-width: 550px){
+    @media only screen and (min-width: $cut){
     width: 90%;
   }
 }
