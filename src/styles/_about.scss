@@ -48,30 +48,13 @@
   margin-top: 10em;
   width: 90%;
   margin: 0 auto;
-  font-size: 34px;
+  font-size: 26px;
   font-weight: bold;
   max-width: 960px;
   color: #D30000;
   padding-top: 1em;
   line-height: 1.25;
   @media only screen and (min-width: $cut) {
-    width: 90%;
-  }
-}
-
-.post-title2 {
-h3{margin-block-start:50; margin-block-end:50; margin-inline-start:50; margin-inline-end:50;
-}
-
-margin: 0 auto;
-    width: 90%;
-    line-height: 1.5;
-    max-width: 960px;
-    color: #555;
-    font-family: "Montserrat",sans-serif;
-    font-size: 1.17em;
-    font-weight: bold;
-    @media only screen and (min-width: $cut){
     width: 90%;
   }
 }
