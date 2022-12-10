@@ -45,11 +45,15 @@
 
 .post-title {
   text-align: center;
+  margin-top: 10em;
   width: 90%;
   margin: 0 auto;
   font-size: 34px;
+  font-weight: bold;
   max-width: 960px;
   color: #D30000;
+  padding-top: 1em;
+  line-height: 1.25;
   @media only screen and (min-width: $cut) {
     width: 90%;
   }
