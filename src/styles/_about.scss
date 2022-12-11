@@ -46,7 +46,7 @@ img {
     height: 10%;
     border-radius: 5px;
     @media only screen and (min-width: $cut) {
-      float: left;
+      width: 90%;
   }
 }
 
