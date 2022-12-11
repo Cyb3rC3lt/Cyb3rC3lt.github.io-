@@ -42,11 +42,11 @@
     width: 90%;
   }
 img {
-    max-width: 10%;
-    height: auto;
+    width: 10%;
+    height: 10%;
     border-radius: 5px;
     @media only screen and (min-width: $cut) {
-      float: center;
+      float: left;
   }
 }
 
