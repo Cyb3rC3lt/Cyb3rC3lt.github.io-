@@ -45,12 +45,12 @@ img {
     
     border-radius: 5px;
     width: 90%;
-    max-width: 96px;
+    max-width: 960px;
     margin: 0 auto;
     @media only screen and (min-width: $cut) {
       width: 90%;
   }
-}
+}}
 
 .post-title {
   text-align: center;
