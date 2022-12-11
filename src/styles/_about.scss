@@ -42,9 +42,11 @@
     width: 90%;
   }
 img {
-    width: 10%;
-    height: 10%;
+    
     border-radius: 5px;
+    width: 90%;
+    max-width: 960px;
+    margin: 0 auto;
     @media only screen and (min-width: $cut) {
       width: 90%;
   }
