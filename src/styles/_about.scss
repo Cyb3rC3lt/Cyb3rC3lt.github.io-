@@ -51,19 +51,14 @@
       width: 90%;
       }
     }
-  box {
-  inline-size: 150px;
-  overflow-wrap: anywhere;
-  padding: 15px;
-  margin-bottom: 0;
-  font-size: 14px;
-
-       
-  }
 }
 pre{
-        white-space: pre-wrap;
-      }
+    white-space: pre-wrap;
+    margin-right: 1em;
+    margin-left: 1em;
+    display: block;
+    padding: 10px;
+}
 
 .post-title {
   text-align: center;
