@@ -49,8 +49,18 @@ img {
     margin: 0 auto;
     @media only screen and (min-width: $cut) {
       width: 90%;
+      }
+    }
+  box {
+  inline-size: 150px;
+  overflow-wrap: anywhere;
+  border: 15px solid green;
+  box-sizing: border-box;
+width: 100%;
+border: solid #5B6DCD 10px;
+padding: 5px;
   }
-}}
+}
 
 .post-title {
   text-align: center;
@@ -64,11 +74,6 @@ img {
   @media only screen and (min-width: $cut) {
     width: 90%;
   }
-
-box {
-    inline-size: 150px;
-    overflow-wrap: break-word;
-}
 }
 
 
