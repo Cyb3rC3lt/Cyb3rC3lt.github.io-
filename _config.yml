@@ -5,6 +5,11 @@ user_description: Currently working as a Penetration Tester hacking web apps, mo
 user_title: Ramblings of an aspiring <br>Red Teamer
 email: David@redteaming.org
 github_username:  Cyb3rC3lt
+markdown: kramdown
+highlighter: rouge
+kramdown:
+    input: GFM
+    syntax_highlighter: rouge
 
 # Google-analytics
 google-analytics:
