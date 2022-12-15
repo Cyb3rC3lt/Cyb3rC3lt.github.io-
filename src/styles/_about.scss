@@ -41,7 +41,7 @@
   @media only screen and (min-width: $cut) {
     width: 90%;
   }
-img {
+  img {
     
     border-radius: 5px;
     width: 90%;
@@ -57,13 +57,13 @@ img {
   padding: 15px;
   margin-bottom: 0;
   font-size: 14px;
-  white-space: pre-wrap;
 
-  .highlight pre{
-  white-space: pre-wrap;
-  }
+       
   }
 }
+pre{
+        white-space: pre-wrap;
+      }
 
 .post-title {
   text-align: center;
