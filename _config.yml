@@ -18,7 +18,7 @@ google-analytics:
 exclude: ['package.json', 'src' , 'node_modules']
 
 title: Red Teaming
-description: All things Red Teaming from course reviews to tips and tricks
+description: All things Red Teaming featuring course reviews, research, industry news as well as tips and tricks
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://redteaming.org" # the base hostname & protocol for your site, e.g. http://example.com
 
