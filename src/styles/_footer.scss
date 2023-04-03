@@ -1,7 +1,6 @@
 .footer {
   background: $main;
-  padding: 10px 0;
-  margin-top: 100px;
+  margin-top: 30px;
   text-align: center;
   color: #FFF;
   .love {
@@ -9,7 +8,10 @@
   }
   a {
     text-decoration: none;
+    font-size: 13px;
     margin: 0;
     color: #FFF;
+    text-align: center;
+    margin-top: 10px;
   }
 }
