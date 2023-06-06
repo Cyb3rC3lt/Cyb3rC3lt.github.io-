@@ -43,7 +43,7 @@
     float: right;
     width: 48%;
     padding-left: 50px;
-
+    
   @media only screen and (min-width: $cut) {
     float: right;
     width: 48%;
@@ -56,9 +56,6 @@
 }
 
 .images-left {
-    float: right;
-    width: 48%;
-    padding-right: 50px;
   @media only screen and (min-width: $cut) {
     float: left;
     width: 48%;
