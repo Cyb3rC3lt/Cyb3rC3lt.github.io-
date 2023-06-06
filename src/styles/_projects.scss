@@ -30,14 +30,24 @@
   }
 }
 
+.images-right {
+    float: right;
+    width: 48%;
+    padding-left: 50px;
+  }
+
+.images-left {
+    float: right;
+    width: 48%;
+    padding-right: 50px;
+  }
+
 .contents {
   @media only screen and (min-width: $cut) {
     margin-left: 0;
     width: 48%;
   }
 }
-
-
 
 .images-right {
   @media only screen and (min-width: $cut) {
