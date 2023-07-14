@@ -8,12 +8,12 @@ categories: Blog
 
 Over the past few days I have been trying to get back into playing around with Cobalt Strike more to up my Red Teaming game. As part of that, and to get some practice, I thought I would try to write a simple aggressor script.
 
-The sole purpose of the script would be to email me when a beacon checks in. I imagine after a phishing campaign is sent out, you don't want to be sitting by your screen constantly waiting for something to happen so this might make life easier.
+The sole purpose of the script would be to email me when a beacon checks in. I imagine after a phishing campaign is sent out, you don't want to be sitting by your screen constantly waiting for a beacon, so this might make life easier.
 
 The two pieces of code required are:
 
 - An aggressor script loaded into Cobalt Strike to monitor when a beacon checks in. This I simply called 'email.cna'.
-- A Python script named 'emailme.py' that is called by the aggressor script to send an email on checkin.
+- A Python script named 'emailme.py' that is called by the aggressor script to send an email on check in.
 
 
 ### Scripts
@@ -32,7 +32,7 @@ on beacon_initial {
     $cmd = '/home/kali/emailme.py --computername ' . $computerName . " --internalip " . $internalIP . " --username " . $userName;
     exec($cmd);
 }
-
+{% endhighlight %}
 
 
 Next up we have to build the Python script which I have also shown below. It is quite self explanatory but I guess some mail providers might require app passwords and the like, such as Gmail which might make it trickier.
@@ -61,8 +61,6 @@ body = "Checkin from Beacon with hostname:" + computername + ", with IP: " + int
 sender = "yourname@youremail.org"
 recipients = ["test@testreceipt.com"]
 password = "YourPassword"
-{% endhighlight %}
-
 
 def send_email(subject, body, sender, recipients, password):
     msg = MIMEText(body)
