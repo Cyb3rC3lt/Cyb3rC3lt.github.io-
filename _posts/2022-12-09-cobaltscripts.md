@@ -76,10 +76,13 @@ def send_email(subject, body, sender, recipients, password):
 send_email(subject, body, sender, recipients, password)
 {% endhighlight %}
 
+
 Finally the last thing to do is to load the Aggressor script into Cobalt Strike as shown below, by using the 'Script Manager' window.
+
 
 <img alt="cs" src="/assets/img/CNA-LOADED.jpg"/>
 
+
 The next time a beacon checks in you should receive an email that it has done so. This has been fun playing around with CS again and hopefully this saves you some time.
 
-I think next up I might build a complete C2 infrastructure on Azure with redirectors back to the C2 hosted elsewhere to practice that aspect of Red Teaming. Stay tuned!
+I think next up I might build a complete C2 infrastructure on Azure, with redirectors back to my C2 hosted elsewhere, just to practice that aspect of Red Teaming. Stay tuned!
