@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Cobalt Strike Aggressor Script"
-permalink: "cs"
+permalink: "cobaltscripts"
 date: 14-07-2023
 categories: Blog
 ---
