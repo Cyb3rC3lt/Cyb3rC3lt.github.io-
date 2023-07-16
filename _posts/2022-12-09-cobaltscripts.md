@@ -6,7 +6,7 @@ date: 14-07-2023
 categories: Blog
 ---
 
-Over the past few days I have been trying to get back into playing around with Cobalt Strike more to up my Red Teaming game. As part of that, and to get some practice, I thought I would try to write a simple aggressor script.
+Over the past few days I have been trying to get back into playing around with Cobalt Strike to up my Red Teaming game. As part of that, and to get some practice, I thought I would try to write a simple aggressor script.
 
 The sole purpose of the script would be to email me when a beacon checks in. I imagine after a phishing campaign is sent out, you don't want to be sitting by your screen constantly waiting for a beacon, so this might make life easier.
 
