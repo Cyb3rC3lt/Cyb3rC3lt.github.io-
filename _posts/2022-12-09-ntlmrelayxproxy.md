@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "RBCD on Local Machine via Socks Proxy"
+title: "RBCD on a Local Machine via Socks Proxy"
 permalink: "cme"
 date: 02-09-2023
 categories: Blog
