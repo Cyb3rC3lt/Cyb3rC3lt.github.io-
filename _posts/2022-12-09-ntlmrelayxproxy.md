@@ -10,8 +10,6 @@ I recently got inspired by a neat trick by @flodari on Twitter where he managed 
 
 There is nothing new in these techniques but I hadn't seen this idea before so I decided to see if it could also be done via a C2. Relaying authentications is also my favourite thing to do! 
 
-<video src="{{ "/assets/img/RBCD.mp4" | prepend: site.baseurl }}" />
-
 ### Step 1
 
 1st part of the attack is to open a socks proxy on port 1080 using CStrike on the compromised workstation (Elish) to allow us to tunnel our Kali tools through it.
