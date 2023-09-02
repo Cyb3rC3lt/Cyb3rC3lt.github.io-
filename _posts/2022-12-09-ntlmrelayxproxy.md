@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "RBCD on a Local Machine via Socks Proxy"
-permalink: "cme"
+permalink: "ntlmrelayxproxy"
 date: 02-09-2023
 categories: Blog
 ---
