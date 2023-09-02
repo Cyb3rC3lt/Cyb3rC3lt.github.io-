@@ -32,7 +32,7 @@ We then trigger authentication with PetitPotam over proxychains but the key is t
 
 ### Step 4
 
-In the last step Ntlmrelayx then gets a hit from Elish$ as shown and adds the delegation rights to our evilpc$ allowing use control over the Elish$ machine we have our beacon on. Workstation takeover of Elish$ can then be achieved using the normal http://getST.py approach
+In the last step Ntlmrelayx then gets a hit from Elish$ as shown and adds the delegation rights to our evilpc$ allowing use control over the Elish$ machine we have our beacon on. Workstation takeover of Elish$ can then be achieved using the normal getST approach
 
 <img src="{{ "/assets/img/Result.JPG" | prepend: site.baseurl }}" />
 
