@@ -12,7 +12,7 @@ There is nothing new in these techniques but I hadn't seen this idea before so I
 
 ### Step 1
 
-1st part of the attack is to open a socks proxy on port 1080 using CStrike on the compromised workstation (Elish) to allow us to tunnel our Kali tools through it.
+1st part of the attack is to open a socks proxy on port 1080 using Cobalt Strike on the compromised workstation (Elish) to allow us to tunnel our Kali tools through it.
 Then reverse port fwd 8888 to 80 on our localhost. This will catch any auth on 8888 & pass it to ntlmrelayx on 80
 
 <img src="{{ "/assets/img/CSProxy.JPG" | prepend: site.baseurl }}" />
