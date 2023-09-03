@@ -16,7 +16,7 @@ Enable webdav if not running with: `net start webclient`
 
 ### Step 2
 
-1st part of the attack is to open a socks proxy on port 1080 using Cobalt Strike on the compromised workstation (Elish) to allow us to tunnel our Kali tools through it.
+Next part of the attack is to open a socks proxy on port 1080 using Cobalt Strike on the compromised workstation (Elish) to allow us to tunnel our Kali tools through it.
 Then reverse port fwd 8888 to 80 on our localhost. This will catch any auth on 8888 & pass it to ntlmrelayx on 80
 
 <img src="{{ "/assets/img/CSProxy.JPG" | prepend: site.baseurl }}" />
