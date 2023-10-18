@@ -63,7 +63,7 @@ To get BOF's to work with Sliver you ideally want 3 files:
 }
 {% endhighlight %}
 
-## Install The Release
+### Install The Release
 
 The quickest way to add these 3 files to Sliver is as follows.
 
@@ -72,14 +72,14 @@ The quickest way to add these 3 files to Sliver is as follows.
 3. Within Sliver load the folder you extracted with this command: `extensions install /home/david/klist`
 4. Then load the extension into Sliver as follows: `extensions load /home/david/.sliver-client/extensions/klist`
 
-## Install From Source
+### Install From Source
 
 1. Make sure that Mingw-w64 (including mingw-w64-binutils) has been installed.
 2. Download the source folder above.
 3. Within that folder execute "make" to compile the object files.
 4. Now you have the object files like they appear in the release zip folder so continue from Step 1 of the release method.
 
-## Usage
+### Usage
 
 To display all the cached Kerberos tickets now just issue the command
 
@@ -89,7 +89,7 @@ To purge all the cached Kerberos tickets issue the command
 
 `klist purge`
 
-## Screenshots
+### Screenshots
 
 <img src="https://user-images.githubusercontent.com/33097451/274965338-4ac8bf58-9134-4c1d-9d00-efe0bee11b75.png"/>
 
