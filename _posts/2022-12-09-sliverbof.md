@@ -72,7 +72,7 @@ The quickest way to add these 3 files to Sliver is as follows.
 {% highlight powershell %}
 extensions install /home/david/klist
 {% endhighlight %}
-5. Then load the extension into Sliver as follows:
+4. Then load the extension into Sliver as follows:
 {% highlight powershell %}
 extensions load /home/david/.sliver-client/extensions/klist
 {% endhighlight %}
