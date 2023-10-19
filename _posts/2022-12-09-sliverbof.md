@@ -67,7 +67,7 @@ To get BOF's to work with Sliver you ideally want 3 files:
 
 The quickest way to add these 3 files to Sliver is as follows.
 
-1. Download the zip file from my releases [here] (https://github.com/Cyb3rC3lt/SliveryArmory/releases/tag/v1.0.0)
+1. Download the zip file from my releases [here](https://github.com/Cyb3rC3lt/SliveryArmory/releases/tag/v1.0.0)
 2. Extract it to a folder on your machine named klist for argument sake.
 3. Within Sliver load the folder you extracted with this command:
 `extensions install /home/david/klist`
