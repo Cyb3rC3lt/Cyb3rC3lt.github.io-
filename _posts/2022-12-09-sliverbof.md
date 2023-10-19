@@ -35,7 +35,6 @@ To get BOF's to work with Sliver you ideally want 3 files:
     "command_name": "klist",
     "extension_author": "Cyb3rC3lt",
     "original_author": "OutflankNl",
-    "repo_url": "https://github.com/Cyb3rC3lt/SliverArmory/klistBOF",
     "help": "Displays a list of currently cached Kerberos tickets.",
     "long_help": "",
     "depends_on": "coff-loader",
