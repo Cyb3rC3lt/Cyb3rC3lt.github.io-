@@ -6,9 +6,9 @@ date: 18-10-2023
 categories: Blog
 ---
 
-I was recently playing around with my favourite C2 framework which is [Sliver](https://github.com/BishopFox/sliver) from Bishop Fox. For those of you who haven't used it, it runs completely in the terminal unlike for example, Cobalt Strike or Havoc.
+I was recently playing around with my favourite C2 framework which is [Sliver](https://github.com/BishopFox/sliver) from Bishop Fox. For those of you who that haven't used it, it runs completely in the terminal unlike for example, Cobalt Strike or Havoc.
 
-Whilst using it I noticed that a lot of times when I ran certain commands that Microsoft Defender would kill my connection between my implant and C2 server. This mainly occured when running commands like 'execute' and more specifically when I wanted to run 'execute -o klist' to view my cached Kerberos tickets.
+Whilst using it,I noticed that a lot of times when I ran certain commands that Microsoft Defender would kill my connection between my implant and C2 server. This mainly occured when running commands like 'execute' and more specifically when I wanted to run 'execute -o klist' to view my cached Kerberos tickets.
 
 The reason for this is the infamous 'fork and run' IOC (indicator of compromise) that Defender picks up on. Essentially when certain commands are run via a lot of C2's they create a sacrifical process (the fork) to run the command. When Defender sees this forking it flags it as supicious and kills the connection.
 
@@ -67,10 +67,12 @@ To get BOF's to work with Sliver you ideally want 3 files:
 
 The quickest way to add these 3 files to Sliver is as follows.
 
-1. Download the zip file from my releases here: https://github.com/Cyb3rC3lt/SliveryArmory/releases/tag/v1.0.0
+1. Download the zip file from my releases [here] (https://github.com/Cyb3rC3lt/SliveryArmory/releases/tag/v1.0.0)
 2. Extract it to a folder on your machine named klist for argument sake.
-3. Within Sliver load the folder you extracted with this command: `extensions install /home/david/klist`
-4. Then load the extension into Sliver as follows: `extensions load /home/david/.sliver-client/extensions/klist`
+3. Within Sliver load the folder you extracted with this command:
+`extensions install /home/david/klist`
+5. Then load the extension into Sliver as follows:
+`extensions load /home/david/.sliver-client/extensions/klist`
 
 ### Install From Source
 
@@ -81,11 +83,11 @@ The quickest way to add these 3 files to Sliver is as follows.
 
 ### Usage
 
-To display all the cached Kerberos tickets now just issue the command
+To display all the cached Kerberos tickets issue the command:
 
 `klist`
 
-To purge all the cached Kerberos tickets issue the command
+To purge all the cached Kerberos tickets issue the command:
 
 `klist purge`
 
@@ -95,11 +97,11 @@ To purge all the cached Kerberos tickets issue the command
 
 <img src="https://user-images.githubusercontent.com/33097451/274966113-146cafe6-f3c8-43c6-ad8c-2ad417bfd129.png"/>
 
-After speaking to the Sliver devs over at the BloodHoundGang Slack channel, they have said would like to include it in the Armory. They advised me to open an issue on their Github so it can be processed for inclusion. This is now located here:
+After speaking to the Sliver devs over at the BloodHoundGang Slack channel, they have said they would like to include it in the Armory. They advised me to open an issue on their Github so it can be verified for inclusion. This is now located here:
 
 [https://github.com/BishopFox/sliver/issues/1433](https://github.com/BishopFox/sliver/issues/1433)
 
-This process has been lots of fun and a great learning experience and it gave me an opportunity to work with such an interesting C2 framework. Hope it proved informative and happy hacking!
+This process has been lots of fun and a great learning experience. It gave me an opportunity to work with such an interesting C2 framework as Sliver and to improve my knowledge on how it's BOF framework operates. Hope it proved to be informative and happy hacking!
 
 
 
