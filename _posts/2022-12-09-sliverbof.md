@@ -69,8 +69,10 @@ The quickest way to add these 3 files to Sliver is as follows.
 1. Download the zip file from my releases [here](https://github.com/Cyb3rC3lt/SliveryArmory/releases/tag/v1.0.0)
 2. Extract it to a folder on your machine named klist for argument sake.
 3. Within Sliver load the folder you extracted with this command:
+
 `extensions install /home/david/klist`
 5. Then load the extension into Sliver as follows:
+
 `extensions load /home/david/.sliver-client/extensions/klist`
 
 ### Install From Source
