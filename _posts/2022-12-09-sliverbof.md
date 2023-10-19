@@ -87,13 +87,13 @@ extensions load /home/david/.sliver-client/extensions/klist
 ### Usage
 
 To display all the cached Kerberos tickets issue the command:
-
-`klist`
-
+{% highlight powershell %}
+klist
+{% endhighlight %}
 To purge all the cached Kerberos tickets issue the command:
-
-`klist purge`
-
+{% highlight powershell %}
+klist purge
+{% endhighlight %}
 ### Screenshots
 
 <img src="https://user-images.githubusercontent.com/33097451/274965338-4ac8bf58-9134-4c1d-9d00-efe0bee11b75.png"/>
