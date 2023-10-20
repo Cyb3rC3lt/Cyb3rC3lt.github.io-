@@ -45,6 +45,6 @@ In the last step Ntlmrelayx then gets a hit from Elish$ as shown and adds the de
 
 ### Final Thoughts
 
-I thought this was a nice little way to easily get control of a machine without too much of an effort assuming you have credentials. Hope this helps others too and here's a gif of the whole process in action.
+I thought this was a nice little way to get control of a machine without too much of an effort. Hope this helps others too and here's a gif of the whole process in action.
 
 <img src="{{ "/assets/img/RBCD.gif" | prepend: site.baseurl }}" />
