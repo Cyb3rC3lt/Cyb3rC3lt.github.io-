@@ -12,7 +12,7 @@ There is nothing new in these techniques but I hadn't seen this attack sequence 
 
 ### Step 1
 
-Enable webdav if not running with: 
+Enable webdav if not running with this command or ideally use a BOF instead: 
 
 `'net start webclient'`
 
