@@ -50,13 +50,13 @@ So the methods used then become these native ones:
 
 ### Coding - Main Module
 
-I now wanted to put all this to the test and cobble together a Nim shellcode runner to take some remote shellcode from Sliver C2 over http or smb, open a process, inject the shellcode into it and execute the thread to give me my reverse shell back to Sliver.
+I now wanted to put all of this to the test and cobble together a Nim shellcode runner to take some remote shellcode from Sliver C2 over http or smb, open a process, inject the shellcode into it and execute the thread to give me my reverse shell back to Sliver.
 
 I started by creating my main module to read in the parameters from the command line, such as whether the payload is accessed via SMB or http, as well as things like the IP or port/share to receive the data.
 
-I also have it decrypting the payload if it arrives encrypted by Sliver, but on speaking to others on the Bishop Fox repo we think the encryption Sliver can do automatically currently may not be working so I was unable to verify if this works. This removes the iv from the first 16 bytes of a Sliver payload when required then passes it to a decrypt function to decrypt the AES128 CBC encryption that it uses as default.
+I also have it decrypting the payload if it arrives encrypted by Sliver, but on speaking to others on the Bishop Fox repo, we think the encryption Sliver can do automatically currently may not be working so I was unable to verify if this works. The code removes the unrequired iv from the first 16 bytes of a Sliver payload then passes it to a decrypt function to decrypt the AES128 CBC encryption that it uses as default.
 
-For now here is the main method created for my purposes.
+For now here is the main method created for my purposes:
 
 {% highlight powershell %} 
 
@@ -186,7 +186,7 @@ proc runShellcode(shellcode: seq[byte]): void =
     status = NtClose(pHandle)
 {% endhighlight %}
 
-You may notice that I am injecting into the current process by getting its ID like so: "let cProcess = GetCurrentProcessId()". This is because I found that injecting into something like Notepad I found was a massive red flag to Defender. So although I would get my connection back as soon as I did something very basic with Sliver such as upload a file the session would be killed. 
+You may notice that I am injecting into the current process by getting its ID like so: "let cProcess = GetCurrentProcessId()". This is because I found that injecting into something like Notepad I found was a massive red flag to Defender. So although I would get my connection back, as soon as I did something very basic with Sliver such as upload a file the session would be killed. 
 
 I found this could be circumvented by just letting syscalls do its thing and creating a new process. I realise most EDR vendors would eat this indicator for breakfast but for evading Defender it was sufficient.
 
