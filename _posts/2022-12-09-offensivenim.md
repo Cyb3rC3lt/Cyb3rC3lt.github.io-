@@ -6,7 +6,7 @@ date: 19-10-2023
 categories: Blog
 ---
 
-During some downtime in my pentesting recently, I have  tried to increase my knowledge of the tooling required to avoid AV. I had built a basic runner in C++ that incorporated syscalls to bypass Defender, but I was seeing some [videos](https://www.youtube.com/watch?v=vq6wNGYzdDE) by John Hammond explaining the powers of the programming language called Nim, so I wanted to give it a try next.
+During some downtime in my pentesting recently, I have  tried to increase my knowledge of the tooling required to avoid AV. I had previously built a basic runner in C++ that incorporated syscalls to bypass Defender, but I was seeing some [videos](https://www.youtube.com/watch?v=vq6wNGYzdDE) by John Hammond explaining the powers of the programming language called Nim, so I wanted to give that a try next.
 
 In recent years Nim has become the preferred choice of many Malware writers due to the fact that the syntax is Python like, yet it compiles executables or dll's very easily for Windows, so it can be an ideal choice for newbies.
 
@@ -50,11 +50,11 @@ So the methods used then become these native ones:
 
 ### Coding - Main Module
 
-I now wanted to put all this to the test and cobble together a Nim shellcode runner to take some remote shellcode from Sliver C2 over http or smb, open a process, inject the shellcode into it and execute the remote thread to give me my reverse shell back to Sliver.
+I now wanted to put all this to the test and cobble together a Nim shellcode runner to take some remote shellcode from Sliver C2 over http or smb, open a process, inject the shellcode into it and execute the thread to give me my reverse shell back to Sliver.
 
-I started by creating my main module to read in the parameters from the command line such as whether the payload is accessed via SMB or http as well as things like the IP or port/share to get the data.
+I started by creating my main module to read in the parameters from the command line, such as whether the payload is accessed via SMB or http, as well as things like the IP or port/share to receive the data.
 
-I also have it decrypting the payload if it arrives encrypted by Sliver but on speaking to others on the Bishop Fox repo we think the encryption Sliver can do automatically may not be working currently so I was unable to verify if this works. This removes the iv from the first 16 bytes of a Sliver payload when required then passes it to a decrypt function to decrypt the AES128 CBC encryption that Sliver uses.
+I also have it decrypting the payload if it arrives encrypted by Sliver, but on speaking to others on the Bishop Fox repo we think the encryption Sliver can do automatically currently may not be working so I was unable to verify if this works. This removes the iv from the first 16 bytes of a Sliver payload when required then passes it to a decrypt function to decrypt the AES128 CBC encryption that it uses as default.
 
 For now here is the main method created for my purposes.
 
@@ -122,7 +122,7 @@ when isMainModule:
 
 ### Coding - Shellcode Running via Syscalls
 
-Now that I have my shellcode received over the network from my main method, I needed to call the 4 methods earlier to get my Shellcode into memory. I created the runShellcode methos as shown below.
+Now that I have my shellcode received over the network from my main method, I needed to call the 4 methods mentioned earlier to get my Shellcode into memory. I created the runShellcode method as shown below which uses a GetSysCallStub module developed by Fabian aka [S3cur3Th1sSh1t](https://github.com/S3cur3Th1sSh1t/NimGetSyscallStub).
 
 {% highlight powershell %} 
 proc runShellcode(shellcode: seq[byte]): void =
@@ -186,10 +186,19 @@ proc runShellcode(shellcode: seq[byte]): void =
     status = NtClose(pHandle)
 {% endhighlight %}
 
+You may notice that I am injecting into the current process by getting its ID like so: "let cProcess = GetCurrentProcessId()". This is because I found that injecting into something like Notepad I found was a massive red flag to Defender. So although I would get my connection back as soon as I did something very basic with Sliver such as upload a file the sessions would be killed. I found this could be circumvented by just letting syscalls do its thing and creating a new process. I realise most EDR vendors would eat this indicator for breakfast but for evading Defender it was sufficient.
+
+If you do want to try injection into say Notepad and run it without opening up, you could just change those lines to something like this:
+
+{% highlight powershell %} 
+    let tProcess = startProcess("notepad.exe")
+    tProcess.suspend()
+    defer: tProcess.close()
+    cid.UniqueProcess = tProcess.processID
+{% endhighlight %}
 
 
-[https://github.com/BishopFox/sliver/issues/1433](https://github.com/BishopFox/sliver/issues/1433)
-
+The purpose of this post wasn't to release a fully fledged tool but just to provide the reader with enough information in regards to Nim including my own snippets of code, to help them start to build their own Nim runner too. Feel free to drop me a mail if you want any further information on any of this.
 
 
 
