@@ -186,7 +186,7 @@ proc runShellcode(shellcode: seq[byte]): void =
     status = NtClose(pHandle)
 {% endhighlight %}
 
-You may notice that I am injecting into the current process by getting its ID like so: "let cProcess = GetCurrentProcessId()". This is because I found that injecting into something like Notepad I found was a massive red flag to Defender. So although I would get my connection back as soon as I did something very basic with Sliver such as upload a file the sessions would be killed. 
+You may notice that I am injecting into the current process by getting its ID like so: "let cProcess = GetCurrentProcessId()". This is because I found that injecting into something like Notepad I found was a massive red flag to Defender. So although I would get my connection back as soon as I did something very basic with Sliver such as upload a file the session would be killed. 
 
 I found this could be circumvented by just letting syscalls do its thing and creating a new process. I realise most EDR vendors would eat this indicator for breakfast but for evading Defender it was sufficient.
 
@@ -199,10 +199,11 @@ If you do want to try injection into say Notepad and run it without opening up, 
     cid.UniqueProcess = tProcess.processID
 {% endhighlight %}
 
+I found that on creating an executable with the above code that Defender compeletely ignores it mainly due to the fact that the payload isn't stored within the exe but is downloaded over the wire. The use of syscalls upon injection also prevented any behavioural triggers by Defender I found.
 
-The purpose of this post wasn't to release a fully fledged tool but just to provide the reader with enough information in regards to Nim including my own snippets of code, to help them start to build their own Nim runner too. 
+The purpose of this post wasn't to release a fully fledged tool, but just to provide the reader with enough information in regards to Nim including my own snippets of code, to help them start to build their own Nim runner too. 
 
-Nim is such a nice language to programme in and allows you to build tools very quickly I found.Feel free to drop me a mail if you want any further information on any of this and I will be more than happy to provide it.
+Nim is such a nice language to programme in and allows you to build tools very quickly I found. Feel free to drop me a mail if you want any further information on any of this and I will be more than happy to provide it.
 
 
 
