@@ -40,11 +40,12 @@ Anyhow, to avoid this AV hooking you can use a technique called 'Syscalls'. Sysc
 
 So the methods used then become these native ones:
 
-*Windows API*       *Native API*
-VirtualAllocEx      NtAllocateVirtualMemory
-WriteProcessMemory  NtWriteVirtualMemory
-VirtualProtectEx    NtProtectVirtualMemory
-CreateRemoteThread  NtCreateThreadEx
+|*Windows API*       |*Native API*            | 
+---------------------|------------------------|
+|VirtualAllocEx      |NtAllocateVirtualMemory |
+|WriteProcessMemory  |NtWriteVirtualMemory    | 
+|VirtualProtectEx    |NtProtectVirtualMemory  |
+|CreateRemoteThread  |NtCreateThreadEx        |
 
 
 ### Coding
