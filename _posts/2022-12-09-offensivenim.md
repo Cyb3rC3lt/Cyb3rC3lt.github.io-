@@ -199,11 +199,11 @@ If you do want to try injection into say Notepad and run it without opening up, 
     cid.UniqueProcess = tProcess.processID
 {% endhighlight %}
 
-I found that on creating an executable with the above code that Defender compeletely ignores it mainly due to the fact that the payload isn't stored within the exe but is downloaded over the wire. The use of syscalls upon injection also prevented any behavioural triggers by Defender I found.
+I found that on creating an executable with the above code that Defender compeletely ignores it mainly due to the fact that the payload isn't stored within the exe but is downloaded over the wire. The use of syscalls upon injection also prevented any behavioural triggers by Defender during my testing.
 
-The purpose of this post wasn't to release a fully fledged tool, but just to provide the reader with enough information in regards to Nim including my own snippets of code, to help them start to build their own Nim runner too. 
+The purpose of this post wasn't to release a fully fledged tool, but just to provide you with enough information about Nim to build your own shellcode runner too. 
 
-Nim is such a nice language to programme in and allows you to build tools very quickly I found. Feel free to drop me a mail if you want any further information on any of this and I will be more than happy to provide it.
+It turns out that Nim is such a nice language to program in and allows you to build tools very quickly. Feel free to drop me a mail if you want any further information on any of this and I will be more than happy to provide it.
 
 
 
