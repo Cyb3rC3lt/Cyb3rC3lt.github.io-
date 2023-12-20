@@ -40,7 +40,8 @@ You will now be provided the code that you need to run to connect your private i
 I chose Debian then 64-bit and the code I received was similar to below which I then ran on Kali:
 
 {% highlight powershell %}
-curl -L --output cloudflared.deb https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb 
+curl -L --output cloudflared.deb 
+https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb 
 
 sudo dpkg -i cloudflared.deb
 
