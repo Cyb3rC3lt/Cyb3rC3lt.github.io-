@@ -29,7 +29,7 @@ Then choose 'Access' followed by 'Tunnels'. This will display the 'Create a tunn
 
 <img alt="cs" src="/assets/img/createtunnel.jpg"/>
 
-You will now be provided the code that you need to run to connect your private internal infrastructure to Cloudflare as shown: 
+You will now be provided the code, including the 'YourVeryLongSecretKeyHere' referenced below, that you need to run to connect your private internal infrastructure to Cloudflare as shown: 
 
 <br /> 
 
@@ -89,7 +89,7 @@ cloudflared tunnel --url http://localhost:8080
 
 The 'cloudflared' command will then spit out a temporary url that you can also use to access the tunnel, which can be handy if you don't own a domain name and want to test the tunnels out.  
 
-I hope this whistle stop tour is useful for people out there and if you are more a video type of person, I found [this handy](https://www.youtube.com/watch?v=ey4u7OUAF3c) from 'Network Chuck' when I was working all of this out:
+I hope this whistle stop tour is useful for people out there and if you are more a video type of person, I found [this handy](https://www.youtube.com/watch?v=ey4u7OUAF3c) from 'Network Chuck' when I was working all of this out.
 
 Happy Christmas and Happy New Year! Roll on 2024 for lots more Hacking.
 
