@@ -62,7 +62,9 @@ Now in the ‘Overview’ area of your Cloudflare tunnels you will be provided w
 
 To then start the tunnels on your VM you run this command:
 
-`cloudflared tunnel run --token YourTokenHere`
+{% highlight powershell %}
+cloudflared tunnel run --token YourTokenHere
+{% endhighlight %}
 
 Right, just taking us back to our overview diagram to view our progress, we have now completed the area in red, so we are halfway there. Good job.
 
@@ -76,7 +78,9 @@ To create our worker some tools are required, and some code needs to be deployed
 
 Firstly, if you don’t have it installed, install the npm package like so which provides access to the npx command:
 
-`sudo apt install npm`
+{% highlight powershell %}
+sudo apt install npm
+{% endhighlight %}
 
 Following this, checkout out the demo Cloudflare worker we have provided on our Github repo that will contain a ‘src’ folder which has an index.js file (which is the code the Worker uses to run) and it will also contain a wrangler.toml file which contains the variables the Worker references:
 
@@ -84,13 +88,17 @@ https://github.com/JumpsecLabs&#8203;/CloudflareRedirector
 
 Now cd into the ‘CloudflareRedirector folder and run this command to install the wrangler files required to deploy the worker to Cloudflare.
 
-`npm install wrangler --save-dev`
+{% highlight powershell %}
+npm install wrangler --save-dev
+{% endhighlight %}
 
 A folder named node_modules and a file named package.json will also be created within our folder but we don’t need to be concerned with those.
 
 Next, we need to authenticate to the Cloudflare account we set up previously so issue this command and log into Cloudflare:
 
-`npx wrangler login`
+{% highlight powershell %}
+npx wrangler login
+{% endhighlight %}
 
 Finally open the wrangler.toml file in your text editor of choice and edit the fields outlined in red below including your accountid that we found at the beginning of this post. The URLs should match the tunnel URLs you have previously set up. The worker endpoint, customip, service variables, etc. can be readjusted after it has been deployed so you can leave them as-is.
 
@@ -100,7 +108,9 @@ The wrangler.toml file that provides variables to be used by the Cloudflare work
 
 With all of this data populated we can now deploy the Worker to Cloudflare with:
 
-`npx wrangler deploy`
+{% highlight powershell %}
+npx wrangler deploy
+{% endhighlight %}
 
 Now when we go back to Cloudflare and go to the ‘Workers & Pages’ section we should see our new Worker named ‘redirector’ as shown:
 
