@@ -70,7 +70,7 @@ Right, just taking us back to our overview diagram to view our progress, we have
 
 As it stands you can now send data into your tunnels quite easily, the problem is, that so can anyone else. As covert red teams that is not a good look, so we need to add some protection to the tunnels. This is where the workhorse of the setup comes into play via the Cloudflare worker.
 
-The Cloudflare worker comes with its own Cloudflare URL, normally something like customworkername.customsubdomain.workers.dev but it can also be a domain of your choosing. We have kept it as the well-known Cloudflare workers.dev prefix for demonstration purposes. The worker is essentially serverless code, which is constantly receiving requests and, in our case, redirecting those requests to where we want them to go.
+The Cloudflare worker comes with its own Cloudflare URL, normally something like worker1.subdomain.workers.dev but it can also be a domain of your choosing. We have kept it as the well-known Cloudflare workers.dev prefix for demonstration purposes. The worker is essentially serverless code, which is constantly receiving requests and, in our case, redirecting those requests to where we want them to go.
 
 To create our worker some tools are required, and some code needs to be deployed but this doesn’t necessarily need to be carried out on your cloud VM and can be carried out from your local Linux system that has access to your Cloudflare account.
 
@@ -80,7 +80,7 @@ Firstly, if you don’t have it installed, install the npm package like so which
 
 Following this, checkout out the demo Cloudflare worker we have provided on our Github repo that will contain a ‘src’ folder which has an index.js file (which is the code the Worker uses to run) and it will also contain a wrangler.toml file which contains the variables the Worker references:
 
-https://github.com/JumpsecLabs/CloudflareRedirector
+https://github.com/JumpsecLabs&#8203;/CloudflareRedirector
 
 Now cd into the ‘CloudflareRedirector folder and run this command to install the wrangler files required to deploy the worker to Cloudflare.
 
