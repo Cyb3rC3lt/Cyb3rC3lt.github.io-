@@ -41,7 +41,7 @@ I chose Debian then 64-bit and the code I received was similar to below which I 
 
 {% highlight powershell %}
 curl -L --output cloudflared.deb 
-https://github.com/cloudflare/cloudflared/ releases/latest/download/cloudflared-linux-amd64.deb 
+https://github.com/cloudflare/cloudflared/&#8203;releases/latest/download/cloudflared-linux-amd64.deb 
 
 sudo dpkg -i cloudflared.deb
 
