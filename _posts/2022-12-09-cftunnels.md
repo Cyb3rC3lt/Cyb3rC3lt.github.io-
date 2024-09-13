@@ -65,7 +65,7 @@ There is likely lots of ways (with less obvious naming etc) to set up your route
 
 <img alt="cs" src="/assets/img/tunnelsubdomains.jpg"/>
 
-I created [https://subdomain1.redteaming.org](https://subdomain1.redteaming.org) and [http://subdomain2.redteaming.org/payload.bin](http://subdomain2.redteaming.org/payload.bin). For subdomain1 I will route any traffic that hits [https://subdomain1.redteaming.org](https://subdomain1.redteaming.org) and route it via the connected tunnel to the internal IP VMware gives me on Kali which is 192.168.32.145. On port 443 of that IP I then have my Havoc listener accepting connections. Therefore when creating a payload I set the payload to call back to [https://subdomain1.redteaming.org](https://subdomain1.redteaming.org) which then gets routed back to my internal Havoc server.
+I created [https://subdomain1.redteaming.org](https://subdomain1.redteaming.org) and [http://subdomain2.redteaming.org&#8203;/payload.bin](http://subdomain2.redteaming.org/payload.bin). For subdomain1 I will route any traffic that hits [https://subdomain1.redteaming.org](https://subdomain1.redteaming.org) and route it via the connected tunnel to the internal IP VMware gives me on Kali which is 192.168.32.145. On port 443 of that IP I then have my Havoc listener accepting connections. Therefore when creating a payload I set the payload to call back to [https://subdomain1.redteaming.org](https://subdomain1.redteaming.org) which then gets routed back to my internal Havoc server.
 
 The only other change to get this working was to go into the 'Additional application settings of that route and to enable the 'No TLS Verify' flag as shown to avoid TLS checks:
 <br /> 
@@ -74,7 +74,7 @@ The only other change to get this working was to go into the 'Additional applica
 
 <br /> 
 
-For subdomain2 I will route any traffic that hits the [http://subdomain2.redteaming.org/payload.bin](http://subdomain2.redteaming.org/payload.bin) url which will be routed back to my infrastructure and will grab a payload.bin file from my internal webserver. This is just another use case I thought might be useful.
+For subdomain2 I will route any traffic that hits the [http://subdomain2.redteaming.org/payload.bin](http://subdomain2.redteaming.org&#8203;/payload.bin) url which will be routed back to my infrastructure and will grab a payload.bin file from my internal webserver. This is just another use case I thought might be useful.
 
 Two things to keep in mind, is that as soon as you stop the tunnel on Kali, all these routes are down, so it isn't something that is up and running constantly that you have to worry about.
 
