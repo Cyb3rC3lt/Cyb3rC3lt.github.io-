@@ -80,7 +80,7 @@ Firstly, if you don’t have it installed, install the npm package like so which
 
 Following this, checkout out the demo Cloudflare worker we have provided on our Github repo that will contain a ‘src’ folder which has an index.js file (which is the code the Worker uses to run) and it will also contain a wrangler.toml file which contains the variables the Worker references:
 
-https://github.com/JumpsecLabs/CloudflareRedirector
+https://github.com/JumpsecLabs&#8203;/CloudflareRedirector
 
 Now cd into the ‘CloudflareRedirector folder and run this command to install the wrangler files required to deploy the worker to Cloudflare.
 
@@ -204,6 +204,6 @@ So, if you are still with me that is now all we need to access our cloud infrast
 The above Cloudflare configuration coupled with Azure snapshots and Tmux Resurrect make for a really nice combination in regards swiftly bringing up your red team infrastructure. We hope that you found this useful, and we feel that it is worth trying this setup out for yourself and your team if you want to speed up your infrastructure creation.
 
 
-I originally posted this at: https://labs.jumpsec.com/putting-the-c2-in-c2loudflare/
+I originally posted this at: https://labs.jumpsec.com&#8203;/putting-the-c2-in-c2loudflare/
 
 
