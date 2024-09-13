@@ -100,7 +100,7 @@ klist purge
 
 <img src="https://user-images.githubusercontent.com/33097451/274966113-146cafe6-f3c8-43c6-ad8c-2ad417bfd129.png"/>
 
-After speaking to the Sliver devs over at the BloodHoundGang Slack channel, they have said they would like to include it in the Armory. They advised me to open an issue on their Github so it can be verified for inclusion. This is now located here:
+After speaking to the Sliver devs over at the BloodHoundGang Slack channel, they have said they would like to include it in the Armory. They advised me to open an issue on their Github so it can be verified for inclusion. This is now located here and has gone live on the official repo:
 
 [https://github.com/BishopFox&#8203;/sliver/issues/1433](https://github.com/BishopFox/sliver/issues/1433)
 
