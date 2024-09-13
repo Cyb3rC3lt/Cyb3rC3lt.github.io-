@@ -80,7 +80,7 @@ Firstly, if you don’t have it installed, install the npm package like so which
 
 Following this, checkout out the demo Cloudflare worker we have provided on our Github repo that will contain a ‘src’ folder which has an index.js file (which is the code the Worker uses to run) and it will also contain a wrangler.toml file which contains the variables the Worker references:
 
-https://github.com/JumpsecLabs&#8203;/CloudflareRedirector
+https://github.com/JumpsecLabs/CloudflareRedirector
 
 Now cd into the ‘CloudflareRedirector folder and run this command to install the wrangler files required to deploy the worker to Cloudflare.
 
@@ -196,7 +196,7 @@ So, if you are still with me that is now all we need to access our cloud infrast
 
  - We update Cloudflare as I have shown to expect our custom header values.
  - We update Cloudflare to expect a custom IP should we want to grab files from a specific IP.
- - We can generate a C2\Ligolo agent with a custom header. Therefore, with the branched websockets version of Ligolo-ng as an example you can do the following:ligolosockets.exe -connect https://redirector.myname.&#8203;workers.dev:443 -ua MY-LIGOLO
+ - We can generate a C2\Ligolo agent with a custom header. Therefore, with the branched websockets version of Ligolo-ng as an example you can do the following:ligolosockets.exe -connect https://redirector.myname.workers.dev:443 -ua MY-LIGOLO
  - We send all of our requests to the Worker redirector URL and not to the tunnels directly as the Worker will add the zero trust header values required to enter the tunnels. Accessing them directly will no longer work except for the email login to our file server.
  - The worker passes the request to the app sitting in front of the tunnels which then checks for the service auth token to make sure it matches.
  - If the service auth token matches, the request is directed to that specific tunnel. This then flows into the internal URL of our Cloud VM (which is specified in the tunnel config) to provide us with our connectivity.
@@ -204,6 +204,6 @@ So, if you are still with me that is now all we need to access our cloud infrast
 The above Cloudflare configuration coupled with Azure snapshots and Tmux Resurrect make for a really nice combination in regards swiftly bringing up your red team infrastructure. We hope that you found this useful, and we feel that it is worth trying this setup out for yourself and your team if you want to speed up your infrastructure creation.
 
 
-I originally posted this at: https://labs.jumpsec.com&#8203;/putting-the-c2-in-c2loudflare/
+I originally posted this at: https://labs.jumpsec.com/putting-the-c2-in-c2loudflare/
 
 
