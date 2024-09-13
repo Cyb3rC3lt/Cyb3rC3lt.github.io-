@@ -102,7 +102,7 @@ klist purge
 
 After speaking to the Sliver devs over at the BloodHoundGang Slack channel, they have said they would like to include it in the Armory. They advised me to open an issue on their Github so it can be verified for inclusion. This is now located here:
 
-[https://github.com/BishopFox/sliver/issues/1433](https://github.com/BishopFox/sliver/issues/1433)
+[https://github.com/BishopFox/sliver/issues/1433](https://github.com/BishopFox&#8203;/sliver/issues/1433)
 
 This process has been lots of fun and a great learning experience. It gave me an opportunity to work with such an interesting C2 framework as Sliver and to improve my knowledge on how it's BOF framework operates. Hope it proved to be informative and happy hacking!
 
