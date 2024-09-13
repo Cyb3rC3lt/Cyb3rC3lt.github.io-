@@ -74,7 +74,7 @@ The only other change to get this working was to go into the 'Additional applica
 
 <br /> 
 
-For subdomain2 I will route any traffic that hits the [http://subdomain2.redteaming.org/payload.bin](http://subdomain2.redteaming.org&#8203;/payload.bin) url which will be routed back to my infrastructure and will grab a payload.bin file from my internal webserver. This is just another use case I thought might be useful.
+For subdomain2 I will route any traffic that hits the [http://subdomain2.redteaming.org&#8203;/payload.bin](http://subdomain2.redteaming.org/payload.bin) url which will be routed back to my infrastructure and will grab a payload.bin file from my internal webserver. This is just another use case I thought might be useful.
 
 Two things to keep in mind, is that as soon as you stop the tunnel on Kali, all these routes are down, so it isn't something that is up and running constantly that you have to worry about.
 
