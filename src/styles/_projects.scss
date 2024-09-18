@@ -25,9 +25,6 @@
     color: $main;
     font-size: 1.1rem;
   }
-  p {
-    margin-right: 5px;
-  }
 }
 
 .contents {
@@ -39,8 +36,15 @@
 .contents-right {
   @media only screen and (min-width: $cut) {
     float: right;
-    margin-top: -5%;
+    margin-top: -3%;
     width: 48%;
+  }
+}
+.contents-left {
+  @media only screen and (min-width: $cut) {
+    float: right;
+    margin-top: -3%;
+    width: 52%;
   }
 }
 .images-right {
