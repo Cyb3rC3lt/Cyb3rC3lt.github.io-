@@ -18,12 +18,30 @@
     border-radius: 5px;
 
   }
-  h5 {
-    margin: 0;
-  }
   li {
     color: $main;
     font-size: 1.1rem;
+  }
+
+  .contents-left {
+  @media only screen and (min-width: $cut) {
+    float: right;
+    margin-top: -3%;
+    width: 52%;
+  }
+  h3 {
+     margin-top: 0em;
+  }
+  }
+  .contents-right {
+  @media only screen and (min-width: $cut) {
+    float: right;
+    margin-top: -3%;
+    width: 48%;
+  }
+    h3 {
+     margin-top: 0em;
+  }
   }
 }
 
@@ -45,6 +63,9 @@
     float: right;
     margin-top: -3%;
     width: 52%;
+  }
+  h3 {
+     margin-top: 0em;
   }
 }
 .images-right {
